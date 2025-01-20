@@ -2,28 +2,21 @@
 
 import { Github } from "lucide-react";
 import { signIn, useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
-import { useEffect } from "react";
+
 import Loading from "./components/Loading";
 
 export default function Home() {
   const { data, status } = useSession();
-  const dataIsValid = data && data.user?.name;
 
   async function handleSignIn() {
     try {
-      await signIn("google");
+      await signIn("google", { callbackUrl: '/authenticated' });
     } catch (error) {
       console.error('Could not signIn', error);
     }
   }
 
-  useEffect(() => {
-    if (status === 'authenticated') return redirect('/authenticated');
-  }, [status]);
-
   if (status === 'loading') return <Loading />;
-  if (status === 'authenticated' || dataIsValid) return redirect('/authenticated');
 
   return (
     <div className="grid grid-cols-[2fr_1fr]">

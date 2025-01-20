@@ -2,13 +2,13 @@
 
 import { ReactNode } from "react"
 import { Session } from "next-auth"
-import { SessionProvider } from "next-auth/react"
+import { SessionProvider, SessionProviderProps } from "next-auth/react"
 
 interface IProps {
   children: ReactNode;
   session: Session | null;
 }
 
-export default function Protected({ children, session }: IProps) {
+export default function Provider({ session, children }: SessionProviderProps) {
   return <SessionProvider session={session}>{children}</SessionProvider>
 }

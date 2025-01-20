@@ -2,7 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes AnimateUpFromDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -50px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0px, 0);
+  }
+}
+
+@keyframes AnimateDownFromUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 50px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0px, 0);
+  }
+}
+
+body {
+  background: #fff;
+}
+
 #form-authentication-background {
   background: url("../assets/Background.jpg") no-repeat center center;
   background-size: cover;
+}
+
+#gridRef img {
+  opacity: 0;
+  cursor: pointer;
+}
+
+[data-animate="top"].animate {
+  animation: AnimateUpFromDown 0.62s forwards;
+}
+
+[data-animate="bottom"].animate {
+  animation: AnimateDownFromUp 0.62s forwards;
 }
